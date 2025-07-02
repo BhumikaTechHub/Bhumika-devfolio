@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhumika Yadav | Projects</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 min-h-screen text-gray-900">
+  <header class="sticky top-0 z-50">
+    <div class="relative max-w-6xl mx-auto mt-6 mb-8 rounded-2xl shadow-xl bg-blue-700 px-8 py-8 flex items-center justify-between min-h-[110px]">
+      <a href="about.html" class="text-3xl font-extrabold text-white drop-shadow-lg tracking-wide">Bhumika Yadav</a>
+      <nav class="flex-1 flex justify-center">
+        <ul class="flex flex-wrap gap-4 sm:gap-8 text-lg font-semibold">
+          <li><a href="about.html" class="text-white/90 hover:text-yellow-300 transition">About</a></li>
+          <li><a href="experience.html" class="text-white/90 hover:text-yellow-300 transition">Experience</a></li>
+          <li><a href="projects.html" class="text-white/90 hover:text-yellow-300 transition">Projects</a></li>
+          <li><a href="certifications.html" class="text-white/90 hover:text-yellow-300 transition">Certifications</a></li>
+          <li><a href="achievements.html" class="text-white/90 hover:text-yellow-300 transition">Achievements</a></li>
+          <li><a href="skills.html" class="text-white/90 hover:text-yellow-300 transition">Skills</a></li>
+          <li><a href="education.html" class="text-white/90 hover:text-yellow-300 transition">Education</a></li>
+          <li><a href="contact.html" class="text-white/90 hover:text-yellow-300 transition">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="resume.pdf" download class="absolute right-8 top-1/2 -translate-y-1/2 bg-yellow-300 text-blue-900 font-bold px-6 py-2 rounded-full shadow-lg border-2 border-yellow-400 hover:bg-yellow-400 hover:text-blue-800 hover:border-white transition-all duration-200">Download Resume</a>
+    </div>
+  </header>
+  <main class="w-full px-0">
+    <section class="rounded-2xl shadow-lg bg-pink-50 border-4 border-pink-200 mt-10 mb-8 p-8 w-full max-w-full flex flex-col items-center text-center">
+      <h2 class="text-4xl font-bold text-pink-600 mb-8">Projects</h2>
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div class="relative bg-white rounded-xl p-8 shadow hover:scale-105 hover:shadow-xl transition text-left border-t-8 border-blue-700 flex flex-col">
+          <span class="absolute -top-5 left-6 bg-blue-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow">Web App</span>
+          <h3 class="font-semibold text-2xl mb-2 text-blue-700 mt-2">Cook and Chill</h3>
+          <p class="mb-2 text-lg text-gray-700">A full-stack recipe-sharing app that allows users to create, share, and discover recipes. Features user authentication, JWT-based authorization, and a modern UI for browsing and searching recipes.</p>
+          <ul class="list-disc ml-6 text-gray-700 mb-2">
+            <li>Implemented secure user registration and login with JWT authentication.</li>
+            <li>Designed RESTful APIs for recipe CRUD operations and user management.</li>
+            <li>Built a responsive React frontend for seamless user experience on all devices.</li>
+            <li>Enabled users to bookmark, like, and comment on recipes.</li>
+          </ul>
+          <p class="text-gray-600 text-base mt-auto">Technologies: Node.js, Express, MongoDB, React, JWT, CSS</p>
+        </div>
+        <div class="relative bg-white rounded-xl p-8 shadow hover:scale-105 hover:shadow-xl transition text-left border-t-8 border-yellow-500 flex flex-col">
+          <span class="absolute -top-5 left-6 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow">AI/ML</span>
+          <h3 class="font-semibold text-2xl mb-2 text-yellow-700 mt-2">Trademark Violation Detector</h3>
+          <p class="mb-2 text-lg text-gray-700">An AI-powered web app for detecting trademark violations in images using state-of-the-art object detection.</p>
+          <ul class="list-disc ml-6 text-gray-700 mb-2">
+            <li>Integrated YOLOv9 for real-time object detection and classification.</li>
+            <li>Developed a Flask backend to serve the AI model and handle image uploads.</li>
+            <li>Provided instant feedback to users on potential trademark violations.</li>
+            <li>Deployed the solution for scalable, production-ready use.</li>
+          </ul>
+          <p class="text-gray-600 text-base mt-auto">Technologies: YOLOv9, Flask, Python, HTML/CSS, JavaScript</p>
+        </div>
+        <div class="relative bg-white rounded-xl p-8 shadow hover:scale-105 hover:shadow-xl transition text-left border-t-8 border-pink-500 flex flex-col md:col-span-2">
+          <span class="absolute -top-5 left-6 bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow">IoT/Accessibility</span>
+          <h3 class="font-semibold text-2xl mb-2 text-pink-600 mt-2">Sign Language Translator</h3>
+          <p class="mb-2 text-lg text-gray-700">A real-time wearable translator that converts sign language gestures into text and speech, making communication more accessible.</p>
+          <ul class="list-disc ml-6 text-gray-700 mb-2">
+            <li>Engineered a wearable device using Raspberry Pi and VIAM for gesture recognition.</li>
+            <li>Processed video input to detect and translate sign language in real time.</li>
+            <li>Outputted translated text and speech for seamless communication.</li>
+            <li>Designed for portability and ease of use in daily life.</li>
+          </ul>
+          <p class="text-gray-600 text-base mt-auto">Technologies: Raspberry Pi, VIAM, Python, OpenCV, Text-to-Speech APIs</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-blue-700 text-white text-center py-5 rounded-t-2xl shadow-xl">
+    <div class="max-w-3xl mx-auto">
+      <p class="font-semibold tracking-wide">&copy; 2024 Bhumika Yadav. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html> 

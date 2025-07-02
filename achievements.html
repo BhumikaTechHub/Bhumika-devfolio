@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhumika Yadav | Achievements</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      transform: scale(0.8) translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.show .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.2s ease;
+    }
+
+    .modal-close:hover {
+      color: #333;
+    }
+
+    /* Timeline Animation */
+    .timeline-line {
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: drawLine 2s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes drawLine {
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    /* Card Animations */
+    .achievement-card {
+      opacity: 0;
+      transform: translateX(-50px);
+      animation: slideInLeft 0.8s ease-out forwards;
+    }
+
+    .achievement-card:nth-child(1) {
+      animation-delay: 1s;
+    }
+
+    .achievement-card:nth-child(2) {
+      animation-delay: 1.4s;
+    }
+
+    .achievement-card:nth-child(3) {
+      animation-delay: 1.8s;
+    }
+
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Icon Animation */
+    .achievement-icon {
+      transform: scale(0) rotate(180deg);
+      animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+
+    .achievement-card:nth-child(1) .achievement-icon {
+      animation-delay: 1.2s;
+    }
+
+    .achievement-card:nth-child(2) .achievement-icon {
+      animation-delay: 1.6s;
+    }
+
+    .achievement-card:nth-child(3) .achievement-icon {
+      animation-delay: 2s;
+    }
+
+    @keyframes popIn {
+      to {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    /* Hover Effects */
+    .achievement-card {
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .achievement-card:hover .achievement-icon {
+      transform: scale(1.1) rotate(5deg);
+      transition: transform 0.3s ease;
+    }
+
+    /* Floating Animation for Header */
+    .floating-header {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Pulse Animation for Download Button */
+    .pulse-button {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+      }
+    }
+
+    /* Gradient Background Animation */
+    .animated-bg {
+      background: linear-gradient(-45deg, #dbeafe, #fef3c7, #fce7f3, #e0f2fe);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Section Title Animation */
+    .section-title {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: titleSlideUp 1s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes titleSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Border Animation */
+    .animated-border {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .animated-border::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    /* Navigation Slide Animation */
+    .nav-item {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navSlideDown 0.5s ease-out forwards;
+    }
+
+    .nav-item:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .nav-item:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .nav-item:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .nav-item:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .nav-item:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .nav-item:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    .nav-item:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+
+    .nav-item:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes navSlideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Ripple Effect */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .ripple:active::after {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<!--
+<body class="bg-blue-50 min-h-screen text-gray-900">
+  <header class="sticky top-0 z-50">
+    <div class="relative max-w-6xl mx-auto mt-6 mb-8 rounded-2xl shadow-xl bg-blue-700 px-8 py-8 flex items-center justify-between min-h-[110px]">
+      <a href="about.html" class="text-3xl font-extrabold text-white drop-shadow-lg tracking-wide">Bhumika Yadav</a>
+      <nav class="flex-1 flex justify-center">
+        <ul class="flex flex-wrap gap-4 sm:gap-8 text-lg font-semibold">
+          <li><a href="about.html" class="text-white/90 hover:text-yellow-300 transition">About</a></li>
+          <li><a href="experience.html" class="text-white/90 hover:text-yellow-300 transition">Experience</a></li>
+          <li><a href="projects.html" class="text-white/90 hover:text-yellow-300 transition">Projects</a></li>
+          <li><a href="certifications.html" class="text-white/90 hover:text-yellow-300 transition">Certifications</a></li>
+          <li><a href="achievements.html" class="text-white/90 hover:text-yellow-300 transition">Achievements</a></li>
+          <li><a href="skills.html" class="text-white/90 hover:text-yellow-300 transition">Skills</a></li>
+          <li><a href="education.html" class="text-white/90 hover:text-yellow-300 transition">Education</a></li>
+          <li><a href="contact.html" class="text-white/90 hover:text-yellow-300 transition">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="resume.pdf" download class="absolute right-8 top-1/2 -translate-y-1/2 bg-yellow-300 text-blue-900 font-bold px-6 py-2 rounded-full shadow-lg border-2 border-yellow-400 hover:bg-yellow-400 hover:text-blue-800 hover:border-white transition-all duration-200">Download Resume</a>
+    </div>
+  </header>
+  <main class="w-full px-0">
+    <section class="rounded-2xl shadow-lg bg-yellow-50 border-4 border-yellow-200 mt-10 mb-8 p-8 w-full max-w-full flex flex-col items-center text-center">
+      <h2 class="text-4xl font-bold text-yellow-700 mb-8">Achievements</h2>
+      <div class="w-full flex flex-col items-center">
+        <div class="relative w-full max-w-3xl">
+          <div class="absolute left-6 top-0 bottom-0 w-1 bg-yellow-200 rounded-full"></div>
+          <div class="relative flex flex-col gap-12 ml-12">
+            <div class="relative flex items-start gap-4 card-popup" tabindex="0" data-title="SIH 2023 Finalist" data-content="Selected as a finalist in a national-level innovation competition. Contributed to a team project addressing a real-world problem with a tech-driven solution. Presented to industry experts and government officials. Smart India Hackathon, 2023">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-700 flex items-center justify-center text-white text-xl font-bold shadow">🏆</div>
+              <div class="bg-white rounded-xl p-6 shadow border-l-4 border-yellow-700 w-full">
+                <h3 class="font-semibold text-xl text-yellow-700 mb-1">SIH 2023 Finalist</h3>
+                <p class="text-gray-700 mb-2">Smart India Hackathon, 2023</p>
+                <ul class="list-disc ml-6 text-gray-700 mb-2">
+                  <li>Selected as a finalist in a national-level innovation competition.</li>
+                  <li>Contributed to a team project addressing a real-world problem with a tech-driven solution.</li>
+                  <li>Presented to industry experts and government officials.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-4 card-popup" tabindex="0" data-title="EIS Conference & 67th Milestone Contributor" data-content="Presented research and technical work at the EIS Conference. Contributed to the 67th Milestone event, sharing insights and collaborating with peers. 2024">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white text-xl font-bold shadow">🎤</div>
+              <div class="bg-white rounded-xl p-6 shadow border-l-4 border-blue-700 w-full">
+                <h3 class="font-semibold text-xl text-blue-700 mb-1">EIS Conference & 67th Milestone Contributor</h3>
+                <p class="text-gray-700 mb-2">2024</p>
+                <ul class="list-disc ml-6 text-gray-700 mb-2">
+                  <li>Presented research and technical work at the EIS Conference.</li>
+                  <li>Contributed to the 67th Milestone event, sharing insights and collaborating with peers.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-4 card-popup" tabindex="0" data-title="Digital Design Lead – Student Editorial Board" data-content="Led the digital design team for the Student Editorial Board. Oversaw creation of digital content, graphics, and layouts for university publications and events. Enhanced the visual identity and engagement of student-led initiatives. 2024-25">
+              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white text-xl font-bold shadow">🎨</div>
+              <div class="bg-white rounded-xl p-6 shadow border-l-4 border-pink-500 w-full">
+                <h3 class="font-semibold text-xl text-pink-600 mb-1">Digital Design Lead – Student Editorial Board</h3>
+                <p class="text-gray-700 mb-2">2024-25</p>
+                <ul class="list-disc ml-6 text-gray-700 mb-2">
+                  <li>Led the digital design team for the Student Editorial Board.</li>
+                  <li>Oversaw creation of digital content, graphics, and layouts for university publications and events.</li>
+                  <li>Enhanced the visual identity and engagement of student-led initiatives.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-blue-700 text-white text-center py-5 rounded-t-2xl shadow-xl">
+    <div class="max-w-3xl mx-auto">
+      <p class="font-semibold tracking-wide">&copy; 2024 Bhumika Yadav. All rights reserved.</p>
+    </div>
+  </footer>
+ 
+  <div id="ach-modal-overlay" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" id="ach-modal-close">&times;</button>
+      <h2 id="ach-modal-title" style="margin-bottom:1rem;"></h2>
+      <div id="ach-modal-body"></div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.card-popup').forEach(card => {
+        card.addEventListener('click', function() {
+          document.getElementById('ach-modal-title').textContent = card.getAttribute('data-title');
+          document.getElementById('ach-modal-body').textContent = card.getAttribute('data-content');
+          document.getElementById('ach-modal-overlay').style.display = 'flex';
+        });
+        card.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            card.click();
+          }
+        });
+      });
+      document.getElementById('ach-modal-close').onclick = function() {
+        document.getElementById('ach-modal-overlay').style.display = 'none';
+      };
+      document.getElementById('ach-modal-overlay').onclick = function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+        }
+      };
+    });
+  </script> -->
+
+<body class="animated-bg min-h-screen text-gray-900">
+  <header class="sticky top-0 z-50">
+    <div
+      class="relative max-w-6xl mx-auto mt-6 mb-8 rounded-2xl shadow-xl bg-blue-700 px-8 py-8 flex items-center justify-between min-h-[110px] floating-header animated-border">
+      <a href="about.html" class="text-3xl font-extrabold text-white drop-shadow-lg tracking-wide">Bhumika Yadav</a>
+      <nav class="flex-1 flex justify-center">
+        <ul class="flex flex-wrap gap-4 sm:gap-8 text-lg font-semibold">
+          <li class="nav-item"><a href="about.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">About</a></li>
+          <li class="nav-item"><a href="experience.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Experience</a></li>
+          <li class="nav-item"><a href="projects.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Projects</a></li>
+          <li class="nav-item"><a href="certifications.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Certifications</a></li>
+          <li class="nav-item"><a href="achievements.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Achievements</a></li>
+          <li class="nav-item"><a href="skills.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Skills</a></li>
+          <li class="nav-item"><a href="education.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Education</a></li>
+          <li class="nav-item"><a href="contact.html"
+              class="text-white/90 hover:text-yellow-300 transition ripple">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="resume.pdf" download
+        class="absolute right-8 top-1/2 -translate-y-1/2 bg-yellow-300 text-blue-900 font-bold px-6 py-2 rounded-full shadow-lg border-2 border-yellow-400 hover:bg-yellow-400 hover:text-blue-800 hover:border-white transition-all duration-200 pulse-button ripple">Download
+        Resume</a>
+    </div>
+  </header>
+  <main class="w-full px-0">
+    <section
+      class="rounded-2xl shadow-lg bg-yellow-50/90 backdrop-blur-sm border-4 border-yellow-200 mt-10 mb-8 p-8 w-full max-w-full flex flex-col items-center text-center">
+      <h2 class="text-4xl font-bold text-yellow-700 mb-8 section-title">🏆 Achievements</h2>
+      <div class="w-full flex flex-col items-center">
+        <div class="relative w-full max-w-3xl">
+          <div
+            class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-yellow-400 via-blue-500 to-pink-500 rounded-full timeline-line">
+          </div>
+          <div class="relative flex flex-col gap-12 ml-12">
+            <div class="relative flex items-start gap-4 achievement-card card-popup" tabindex="0"
+              data-title="SIH 2023 Finalist"
+              data-content="Selected as a finalist in a national-level innovation competition. Contributed to a team project addressing a real-world problem with a tech-driven solution. Presented to industry experts and government officials. Smart India Hackathon, 2023">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-800 flex items-center justify-center text-white text-xl font-bold shadow-lg achievement-icon">
+                🏆</div>
+              <div
+                class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-yellow-700 w-full animated-border">
+                <h3 class="font-semibold text-xl text-yellow-700 mb-1">Campus Ambassador – InternsForge</h3>
+                <p class="text-gray-700 mb-2 font-medium">June 2025</p>
+                <ul class="list-disc pl-4 ml-0 text-left text-gray-700 space-y-1">
+                  <li>Represented InternsForge at BML Munjal University as a Campus Ambassador.</li>
+                  <li>Promoted internship programs and built awareness among peers through online and offline outreach.
+                  </li>
+                  <li>Helped coordinate student registrations and engaged the community through events and content
+                    sharing.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-4 achievement-card card-popup" tabindex="0"
+              data-title="EIS Conference & 67th Milestone Contributor"
+              data-content="Presented research and technical work at the EIS Conference. Contributed to the 67th Milestone event, sharing insights and collaborating with peers. 2024">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center text-white text-xl font-bold shadow-lg achievement-icon">
+                🎤</div>
+              <div
+                class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-blue-700 w-full animated-border">
+                <h3 class="font-semibold text-xl text-blue-700 mb-1">EIS Conference & 67th Milestone Contributor</h3>
+                <p class="text-gray-700 mb-2 font-medium">February 2024</p>
+                <ul class="list-disc pl-4 ml-0 text-left text-gray-700 space-y-1">
+                  <li>Presented research and technical work at the EIS Conference.</li>
+                  <li>Contributed to the 67th Milestone event, sharing insights and collaborating with peers.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="relative flex items-start gap-4 achievement-card card-popup" tabindex="0"
+              data-title="Digital Design Lead – Student Editorial Board"
+              data-content="Led the digital design team for the Student Editorial Board. Oversaw creation of digital content, graphics, and layouts for university publications and events. Enhanced the visual identity and engagement of student-led initiatives. 2024-25">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-pink-700 flex items-center justify-center text-white text-xl font-bold shadow-lg achievement-icon">
+                🎨</div>
+              <div
+                class="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg border-l-4 border-pink-500 w-full animated-border">
+                <h3 class="font-semibold text-xl text-pink-600 mb-1">Digital Design Lead – Student Editorial Board</h3>
+                <p class="text-gray-700 mb-2 font-medium">2024-25</p>
+                <ul class="list-disc pl-4 ml-0 text-left text-gray-700 space-y-1">
+                  <li>Led the digital design team for the Student Editorial Board.</li>
+                  <li>Oversaw creation of digital content, graphics, and layouts for university publications and events.
+                  </li>
+                  <li>Enhanced the visual identity and engagement of student-led initiatives.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-blue-700 text-white text-center py-5 rounded-t-2xl shadow-xl">
+    <div class="max-w-3xl mx-auto">
+      <p class="font-semibold tracking-wide">&copy; 2024 Bhumika Yadav. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Modal Markup -->
+  <div id="ach-modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="ach-modal-close">&times;</button>
+      <h2 id="ach-modal-title" class="text-2xl font-bold mb-4 text-gray-800"></h2>
+      <div id="ach-modal-body" class="text-gray-700 leading-relaxed"></div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Modal functionality
+      const modal = document.getElementById('ach-modal-overlay');
+      const modalTitle = document.getElementById('ach-modal-title');
+      const modalBody = document.getElementById('ach-modal-body');
+      const modalClose = document.getElementById('ach-modal-close');
+
+      document.querySelectorAll('.card-popup').forEach(card => {
+        card.addEventListener('click', function () {
+          modalTitle.textContent = card.getAttribute('data-title');
+          modalBody.textContent = card.getAttribute('data-content');
+          modal.style.display = 'flex';
+          setTimeout(() => modal.classList.add('show'), 10);
+        });
+
+        card.addEventListener('keypress', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove('show');
+        setTimeout(() => modal.style.display = 'none', 300);
+      }
+
+      modalClose.onclick = closeModal;
+
+      modal.onclick = function (e) {
+        if (e.target === this) {
+          closeModal();
+        }
+      };
+
+      // Keyboard accessibility for modal
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+          closeModal();
+        }
+      });
+
+      // Add scroll-triggered animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.achievement-card').forEach(card => {
+        observer.observe(card);
+      });
+
+      // Add particle effect on hover
+      document.querySelectorAll('.achievement-card').forEach(card => {
+        card.addEventListener('mouseenter', function () {
+          createParticles(this);
+        });
+      });
+
+      function createParticles(element) {
+        for (let i = 0; i < 6; i++) {
+          const particle = document.createElement('div');
+          particle.style.cssText = `
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: ${['#f59e0b', '#3b82f6', '#ec4899'][Math.floor(Math.random() * 3)]};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+          `;
+
+          const rect = element.getBoundingClientRect();
+          particle.style.left = rect.left + Math.random() * rect.width + 'px';
+          particle.style.top = rect.top + Math.random() * rect.height + 'px';
+
+          document.body.appendChild(particle);
+
+          const animation = particle.animate([
+            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+            {
+              transform: `translate(${(Math.random() - 0.5) * 100}px, ${-50 - Math.random() * 50}px) scale(0)`,
+              opacity: 0
+            }
+          ], {
+            duration: 1000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          });
+
+          animation.onfinish = () => particle.remove();
+        }
+      }
+    });
+  </script>
+</body>
+</body>
+
+</html>
